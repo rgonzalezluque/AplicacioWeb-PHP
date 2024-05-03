@@ -1,4 +1,15 @@
 <?php
+/**
+ * Añadir
+ * 
+ * Fitxer php que utilitzo per afegir nous registres a partir de les dades que els usuaris indiquen al formulari
+ *
+ */
+
+/**
+ * Connecta amb la base de dades MySQL
+ *
+ */
 $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 
 if (!$enlace) {
@@ -6,12 +17,18 @@ if (!$enlace) {
     exit;
 }
 
-
+/**
+ * Obté les dades del nou jugador des del formulari d'inscripció
+ */
 $nom = $_POST['nom'];
 $apellido1 = $_POST['apellido1'];
 $apellido2 = $_POST['apellido2'];
 $telefono = $_POST['telefono'];
 $direccion = $_POST['direccion'];
+
+/**
+ * Fa un insert a la nova base de dades que crea un nou registre amb les dades que especifica l'usuari
+ */
 
 $inscripcióSQL = "INSERT INTO dades_jugadors VALUES (NULL, '$nom', '$apellido1', '$apellido2', '$telefono', '$direccion')";
 ?>

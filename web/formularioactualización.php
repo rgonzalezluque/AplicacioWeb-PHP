@@ -1,4 +1,16 @@
 <?php
+/**
+ * Pàgina de Formulari d'Actualització
+ *
+ * Aquest script PHP mostra un formulari per actualitzar les dades dels jugadors.
+ * Connecta amb una base de dades MySQL i recupera les dades del jugador a actualitzar.
+ * Permet actualitzar les dades del jugador i enviar-les a un script de gestió de la base de dades.
+ */
+
+/**
+ * Connecta amb la base de dades MySQL
+ *
+ */
 $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 
 if (!$enlace) {
@@ -15,7 +27,13 @@ if (!$enlace) {
 </head>
 <body>
     <?php
+    /**
+     * Obté l'identificador del jugador a actualitzar
+     */
     $identificador = $_GET['id_jugador'];
+    /**
+     * Consulta les dades del jugador a actualitzar
+     */
     $resultado = mysqli_query($enlace, "SELECT * FROM dades_jugadors WHERE id_jugador=$identificador");
     $registro = mysqli_fetch_array($resultado);
     ?>
@@ -47,6 +65,9 @@ if (!$enlace) {
     </form>
 
   <script>
+    /**
+     * Pregunta si l'usuari està segur d'enviar el formulari d'actualització
+     */
     function pregunta() {
       if (confirm('¿Estas seguro de enviar este formulario de actualización?')) {
         document.getElementById('formulario').submit();

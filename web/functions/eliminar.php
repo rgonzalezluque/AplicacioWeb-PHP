@@ -1,4 +1,15 @@
 <?php
+/**
+ * Eliminar
+ *
+ * Fitxer php que utilitzo per eliminar els registres que els usuaris indiquen al formulari
+ *
+ */
+
+/**
+ * Connecta amb la base de dades MySQL
+ *
+ */
 $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 
 if (!$enlace) {
@@ -15,7 +26,13 @@ if (!$enlace) {
 </head>
 <body>
     <?php
+    /**
+     * Obté l'identificador del jugador a eliminar
+     */
     $identificador = $_GET['id_jugador'];
+    /**
+     * Inyecta el codi d'eliminació del jugador a la base de dades del web
+     */
     $consulta_eliminacion = "DELETE FROM dades_jugadors WHERE id_jugador=$identificador";
     if (!mysqli_query($enlace,$consulta_eliminacion)) {
         ?>

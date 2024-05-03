@@ -1,4 +1,17 @@
 <?php
+
+/**
+ * Pàgina principal de la web
+ *
+ * Aquest script PHP mostra una plantilla d'equip amb informació dels jugadors.
+ * Connecta amb una base de dades MySQL i recupera les dades dels jugadors.
+ * Proporciona opcions per actualitzar, eliminar i visualitzar les dades dels jugadors.
+ */
+
+/**
+ * Connecta amb la base de dades MySQL
+ *
+ */
 $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 
 if (!$enlace) {
@@ -12,6 +25,11 @@ if (!$enlace) {
 <head>
     <title>Plantilla del equipo</title>
     <script>
+        /**
+         * Funció per confirmar l'eliminació d'un registre
+         *
+         * @return boolean Retorna true si l'usuari confirma, fals si cancel·la
+         */
         function confirmarEliminacion() {
             return confirm("¿Estás seguro de que deseas eliminar este registro?");
         }
@@ -23,6 +41,9 @@ if (!$enlace) {
     <table id="table" border="1">
     <tr><td>Nombre</td><td>Apellido 1</td><td>apellido 2</td><td>Acció</td></tr>
     <?php
+    /**
+     * Consulta dades dels jugadors i mostra una taula
+     */
     $resultado = mysqli_query($enlace, "SELECT * FROM dades_jugadors");
     while ( $registro = mysqli_fetch_array($resultado) ) {
         echo "<tr>";

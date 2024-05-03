@@ -1,4 +1,15 @@
 <?php
+/**
+ * Visualizar 
+ *
+ * Fitxer php que utilitzo per habilitar la funcionalitat de poder veure les dades dels meus jugadors de forma més detallada
+ *
+ */
+
+/**
+ * Connecta amb la base de dades MySQL
+ *
+ */
 $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 
 if (!$enlace) {
@@ -14,7 +25,13 @@ if (!$enlace) {
 </head>
 <body>
     <?php
+    /**
+     * Obté l'identificador del jugador a actualitzar
+     */
     $identificador = $_GET['id_jugador'];
+    /**
+     * Consulta les dades del jugador a visualitzar
+     */
     $resultado = mysqli_query($enlace, "SELECT * FROM dades_jugadors WHERE id_jugador=$identificador");
     $registro = mysqli_fetch_array($resultado);
     ?>
