@@ -43,19 +43,21 @@ $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 <body>
     <h1>Plantilla del equipo</h1>
     <table id="table" border="1">
-    <tr><td>Nombre</td><td>Apellido 1</td><td>apellido 2</td><td>Direccion</td><td>País</td><td>Acció</td></tr>
+    <tr><td>Nombre</td><td>Apellido 1</td><td>Apellido 2</td><td>Telefono</td><td>Direccion</td><td>País</td><td>Acció</td></tr>
     <?php
     /**
      * Consulta dades dels jugadors i mostra una taula
      */
-    $resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, p.nom FROM dades_jugadors d 
-                            INNER JOIN pais p ON d.pais=p.id_pais ");
+    $resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, p.nom, e.nombre_equipo FROM ((dades_jugadors d 
+                            INNER JOIN pais p ON d.pais=p.id_pais)
+                            INNER JOIN equipo e ON d.equipo = e.id_equipo) ");
     while ( $registro = mysqli_fetch_array($resultado) ) {
         echo "<tr>";
         echo "<td>" . $registro['nombre'] . "</td>";
         echo "<td>" . $registro['apellido1'] . "</td>";
         echo "<td>" . $registro['apellido2'] . "</td>";
-        echo "<td>" . $registro['apellido2'] . "</td>";
+        echo "<td>" . $registro['telefono'] . "</td>";
+        echo "<td>" . $registro['nombre_equipo'] . "</td>";
         echo "<td>" . $registro['nom'] . "</td>";
         $linkactualización = "formularioactualización.php?id_jugador=" . $registro['id_jugador'];
         $linkeliminación = "./functions/eliminar.php?id_jugador=" . $registro['id_jugador'];
