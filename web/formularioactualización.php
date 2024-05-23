@@ -35,7 +35,11 @@ if (!$enlace) {
      * Consulta les dades del jugador a actualitzar
      */
     $resultado = mysqli_query($enlace, "SELECT * FROM dades_jugadors WHERE id_jugador=$identificador");
+    
+    $registroPais = 
     $registro = mysqli_fetch_array($resultado);
+    
+    $resultadoPais = mysqli_query($enlace, "SELECT nom FROM pais p WHERE pais = (SELECT pais FROM dades_jugadors d WHERE d.id_pais = p.pais)");
     ?>
     <nav>
         <a href="./index.php">Volver a la página principal</a>
@@ -54,6 +58,9 @@ if (!$enlace) {
     </tr>
     <tr>
         <td>Telefono</td><td><input type="text" name="telefono" value="<?php echo $registro['telefono']; ?>" /></td>
+    </tr>
+    <tr>
+        <td>Dirección</td><td><input type="text" name="direccion" value="<?php echo $registro['direccion']; ?>" /></td>
     </tr>
     <tr>
         <td>Dirección</td><td><input type="text" name="direccion" value="<?php echo $registro['direccion']; ?>" /></td>

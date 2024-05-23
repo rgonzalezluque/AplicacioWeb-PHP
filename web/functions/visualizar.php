@@ -32,14 +32,15 @@ if (!$enlace) {
     /**
      * Consulta les dades del jugador a visualitzar
      */
-    $resultado = mysqli_query($enlace, "SELECT * FROM dades_jugadors WHERE id_jugador=$identificador");
+    $resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, p.nom FROM dades_jugadors d 
+    INNER JOIN pais p ON d.pais=p.id_pais ");    
     $registro = mysqli_fetch_array($resultado);
     ?>
     <nav>
         <a href="../index.php">Volver a la página principal</a>
     </nav>
     <table border="1">
-    <tr><td colspan="2">Datos personales del jugador <?php echo $registro['id_jugador']; ?></td></tr>
+        <tr><td colspan="2">Datos personales del jugador <?php echo $registro['id_jugador']; ?></td></tr>
     <tr>
         <td>Nombre</td><td><?php echo $registro['nombre']; ?></td>
     </tr>
@@ -53,7 +54,10 @@ if (!$enlace) {
         <td>Telefono</td><td><?php echo $registro['telefono']; ?></td>
     </tr>
     <tr>
-        <td>Dirección</td><td><?php echo $registro['direccion']; ?></td>
+        <td>Equipo</td><td><?php echo $registro['telefono']; ?></td>
+    </tr>
+    <tr>
+        <td>Pais</td><td><?php echo $registro['nom']; ?></td>
     </tr>
     </table>
 </body>

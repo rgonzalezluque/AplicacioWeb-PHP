@@ -12,12 +12,13 @@
  * Connecta amb la base de dades MySQL
  *
  */
+
 $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 
-if (!$enlace) {
-    echo "Error a la conexión;: " .mysqli_connect_error();
-    exit;
-}
+    if (!$enlace) {
+        echo "Error a la conexión;: " .mysqli_connect_error();
+        exit;
+    }
 
 ?>
 <!DOCTYPE html>
@@ -34,22 +35,28 @@ if (!$enlace) {
             return confirm("¿Estás seguro de que deseas eliminar este registro?");
         }
     </script>
+
+
+
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 <body>
     <h1>Plantilla del equipo</h1>
     <table id="table" border="1">
-    <tr><td>Nombre</td><td>Apellido 1</td><td>apellido 2</td><td>Acció</td></tr>
+    <tr><td>Nombre</td><td>Apellido 1</td><td>apellido 2</td><td>Direccion</td><td>País</td><td>Acció</td></tr>
     <?php
     /**
      * Consulta dades dels jugadors i mostra una taula
      */
-    $resultado = mysqli_query($enlace, "SELECT * FROM dades_jugadors");
+    $resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, p.nom FROM dades_jugadors d 
+                            INNER JOIN pais p ON d.pais=p.id_pais ");
     while ( $registro = mysqli_fetch_array($resultado) ) {
         echo "<tr>";
         echo "<td>" . $registro['nombre'] . "</td>";
         echo "<td>" . $registro['apellido1'] . "</td>";
         echo "<td>" . $registro['apellido2'] . "</td>";
+        echo "<td>" . $registro['apellido2'] . "</td>";
+        echo "<td>" . $registro['nom'] . "</td>";
         $linkactualización = "formularioactualización.php?id_jugador=" . $registro['id_jugador'];
         $linkeliminación = "./functions/eliminar.php?id_jugador=" . $registro['id_jugador'];
         $linkvisualizar = "./functions/visualizar.php?id_jugador=" . $registro['id_jugador'];

@@ -33,10 +33,12 @@ if (!$enlace) {
     /**
      * Fa un update al jugador per canviar les dades antigues per les noves que ha especificat l'usuari
      */
-    $consulta_actualizacion = "UPDATE dades_jugadors SET nombre = '" . $_POST['nom'] . "', apellido1 = '" . $_POST['apellido1'] . "',
+    $consulta_actualizacion = "UPDATE dades_jugadors SET nombre = '" . $_POST['nom'] . "', 
+                                                        apellido1 = '" . $_POST['apellido1'] . "',
                                                         apellido2 = '" . $_POST['apellido2'] . "',
                                                         telefono = '" . $_POST['telefono'] . "',
-                                                        direccion = '"  . $_POST['direccion'] . "'
+                                                        direccion = '"  . $_POST['direccion'] . "',
+                                                        pais = '" . $_POST['pais'] . "',
                                                         WHERE id_jugador = $identificador;";
     if (!mysqli_query($enlace,$consulta_actualizacion)) {
         ?>
