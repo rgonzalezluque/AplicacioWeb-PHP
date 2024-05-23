@@ -32,8 +32,9 @@ if (!$enlace) {
     /**
      * Consulta les dades del jugador a visualitzar
      */
-    $resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, p.nom FROM dades_jugadors d 
-    INNER JOIN pais p ON d.pais=p.id_pais ");    
+    $resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, e.nombre_equipo,p.nom FROM ((dades_jugadors d 
+    INNER JOIN pais p ON d.pais=p.id_pais)
+    INNER JOIN equipo e ON d.equipo=e.id_equipo) ");    
     $registro = mysqli_fetch_array($resultado);
     ?>
     <nav>
@@ -54,7 +55,7 @@ if (!$enlace) {
         <td>Telefono</td><td><?php echo $registro['telefono']; ?></td>
     </tr>
     <tr>
-        <td>Equipo</td><td><?php echo $registro['telefono']; ?></td>
+        <td>Equipo</td><td><?php echo $registro['nombre_equipo']; ?></td>
     </tr>
     <tr>
         <td>Pais</td><td><?php echo $registro['nom']; ?></td>

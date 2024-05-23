@@ -37,8 +37,8 @@ if (!$enlace) {
                                                         apellido1 = '" . $_POST['apellido1'] . "',
                                                         apellido2 = '" . $_POST['apellido2'] . "',
                                                         telefono = '" . $_POST['telefono'] . "',
-                                                        direccion = '"  . $_POST['direccion'] . "',
-                                                        pais = '" . $_POST['pais'] . "',
+                                                        equipo = '"  . $_POST['equipo'] . "',
+                                                        pais = '" . $_POST['pais'] . "'
                                                         WHERE id_jugador = $identificador;";
     if (!mysqli_query($enlace,$consulta_actualizacion)) {
         ?>
