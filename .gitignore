@@ -1,4 +1,4 @@
 config/
 phpDocumentor.phar
-doc/
 .phpdoc/
+.doc
