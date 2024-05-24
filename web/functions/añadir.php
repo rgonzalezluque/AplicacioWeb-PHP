@@ -24,12 +24,11 @@ $nom = $_POST['nom'];
 $apellido1 = $_POST['apellido1'];
 $apellido2 = $_POST['apellido2'];
 $telefono = $_POST['telefono'];
-$pais = intval($_POST['pais']);
-$direccion = $_POST['direccion'];
+$pais = $_POST['pais'];
+$equipo = $_POST['equipo'];
 
-$SQLDireccion = "INSERT INTO direccion VALUES (NULL, '$direccion')";
-$direccion2 = $enlace->insert_id;
-$inscripcióSQLDades = "INSERT INTO dades_jugadors VALUES (NULL, '$nom', '$apellido1', '$apellido2', '$telefono', NULL,$pais)";
+$inscripcióSQLDades = "INSERT INTO dades_jugadors 
+                        VALUES (NULL, '$nom', '$apellido1', '$apellido2', '$telefono', '$equipo' ,$pais)";
 
 
 ?>

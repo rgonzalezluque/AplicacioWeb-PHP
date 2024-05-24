@@ -54,7 +54,7 @@
     <tr>
       <td>País</td>
       <td>
-      <select name="pais">
+      <select name="pais" id="pais">
         <option value=1>Afganistán</option>
         <option value=2>Albania</option>
         <option value=3>Alemania</option>
