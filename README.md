@@ -1,3 +1,5 @@
 # AplicacioWeb-PHP
 Ruben González Luque
-Versió 0.2
+Versió 1.0
+
+Aplicació amb la que pots gestionar una plantilla completa de jugadors 
