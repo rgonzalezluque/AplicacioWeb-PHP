@@ -24,20 +24,7 @@ $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Plantilla del equipo</title>
-    <script>
-        /**
-         * Funció per confirmar l'eliminació d'un registre
-         *
-         * @return boolean Retorna true si l'usuari confirma, fals si cancel·la
-         */
-        function confirmarEliminacion() {
-            return confirm("¿Estás seguro de que deseas eliminar este registro?");
-        }
-    </script>
-
-
-
+    <title>Usuarios</title>
     <link rel="stylesheet" type="text/css" href="./css/estils.css">
 </head>
 <body>
@@ -45,10 +32,7 @@ $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
     <table id="table" border="1">
     <tr><td>Nombre</td><td>Email</td></tr>
     <?php
-    /**
-     * Consulta dades dels jugadors i mostra una taula
-     */
-$resultado = mysqli_query($enlace, "SELECT id,nom, email FROM usuaris ");
+    $resultado = mysqli_query($enlace, "SELECT id,nom, email FROM usuaris ");
     while ( $registro = mysqli_fetch_array($resultado) ) {
         echo "<tr>";
         echo "<td>" . $registro['nom'] . "</td>";

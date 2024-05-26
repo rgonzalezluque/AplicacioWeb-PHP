@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2>Login</h2>
-    <form method="post">
+    <form method="POST">
         <label for="nom">Nombre de usuario:</label><br>
         <input type="text" id="nom" name="nom"><br>
         <label for="password">Contraseña:</label><br>
