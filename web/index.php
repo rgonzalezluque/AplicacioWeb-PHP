@@ -1,77 +1,66 @@
 <?php
+session_start();
 
-/**
- * Pàgina principal de la web
- *
- * Aquest script PHP mostra una plantilla d'equip amb informació dels jugadors.
- * Connecta amb una base de dades MySQL i recupera les dades dels jugadors.
- * Proporciona opcions per actualitzar, eliminar i visualitzar les dades dels jugadors.
- */
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = $_POST['nom'];
+    $password = $_POST['contraseña'];
 
-/**
- * Connecta amb la base de dades MySQL
- *
- */
+    $query = "SELECT * FROM usuaris WHERE nom = ?";
+    
+    $enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
+    
+    if ($enlace->connect_error) {
+        die("Connection failed: " . $enlace->connect_error);
+    }
+    
+    $stmt = $enlace->prepare($query);
+    
+    if ($stmt === false) {
+        die("Error en la preparación de la consulta: " . $enlace->error);
+    }
+    
+    $stmt->bind_param("s", $nombre);
+    $stmt->execute();
+    
+    $resultado = $stmt->get_result();
+    
+    if ($resultado->num_rows > 0) {
+        $registro = $resultado->fetch_assoc();
 
-$enlace = mysqli_connect("database:3306", "root", "tiger", "jugadors");
-
-    if (!$enlace) {
-        echo "Error a la conexión;: " .mysqli_connect_error();
-        exit;
+        if($password === $registro['contraseña']) {
+            if($registro['nom'] === "admin") {
+                $_SESSION['nom'] = $nombre;
+                header("Location: usuarios.php");
+                exit(); 
+            } else {
+                header("Location: plantilla.php");
+                exit(); 
+            }
+        } else {
+            $error = "Nombre de usuario o contraseña incorrectos";
+        }
+    } else {
+        $error = "Nombre de usuario o contraseña incorrectos";
     }
 
+    $enlace->close();
+}
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <title>Plantilla del equipo</title>
-    <script>
-        /**
-         * Funció per confirmar l'eliminació d'un registre
-         *
-         * @return boolean Retorna true si l'usuari confirma, fals si cancel·la
-         */
-        function confirmarEliminacion() {
-            return confirm("¿Estás seguro de que deseas eliminar este registro?");
-        }
-    </script>
-
-
-
-    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="./css/estils.css">
 </head>
 <body>
-    <h1>Plantilla del equipo</h1>
-    <table id="table" border="1">
-    <tr><td>Nombre</td><td>Apellido 1</td><td>Apellido 2</td><td>Telefono</td><td>Equipo</td><td>País</td><td>Acció</td></tr>
-    <?php
-    /**
-     * Consulta dades dels jugadors i mostra una taula
-     */
-$resultado = mysqli_query($enlace, "SELECT d.id_jugador,d.nombre, d.apellido1, d.apellido2, d.telefono, p.nom, e.nombre_equipo 
-                            FROM ((dades_jugadors d 
-                            INNER JOIN pais p ON d.pais=p.id_pais)
-                            INNER JOIN equipo e ON d.equipo = e.id_equipo) ");
-    while ( $registro = mysqli_fetch_array($resultado) ) {
-        echo "<tr>";
-        echo "<td>" . $registro['nombre'] . "</td>";
-        echo "<td>" . $registro['apellido1'] . "</td>";
-        echo "<td>" . $registro['apellido2'] . "</td>";
-        echo "<td>" . $registro['telefono'] . "</td>";
-        echo "<td>" . $registro['nombre_equipo'] . "</td>";
-        echo "<td>" . $registro['nom'] . "</td>";
-        $linkactualización = "formularioactualización.php?id_jugador=" . $registro['id_jugador'];
-        $linkeliminación = "./functions/eliminar.php?id_jugador=" . $registro['id_jugador'];
-        $linkvisualizar = "./functions/visualizar.php?id_jugador=" . $registro['id_jugador'];
-        echo "<td><a href=\"$linkactualización\">Actualizar</a> / <a href=\"$linkeliminación\" onclick=\"return confirmarEliminacion()\" >Eliminar</a> / <a href=\"$linkvisualizar\">Datos personales</a></td>";
-        echo "</tr>";
-    }
-    ?>
-    </table>
-
-    <footer>
-        <a href="./formulario.php">Añadir nuevos registros<a/>
-    </footer>
-
+    <h2>Login</h2>
+    <form method="post">
+        <label for="nom">Nombre de usuario:</label><br>
+        <input type="text" id="nom" name="nom"><br>
+        <label for="password">Contraseña:</label><br>
+        <input type="contraseña" id="contraseña" name="contraseña"><br>
+        <input type="submit" value="Login">
+    </form>
+    <?php if(isset($error)) echo "<p>$error</p>"; ?>
 </body>
 </html>

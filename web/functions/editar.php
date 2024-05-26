@@ -22,7 +22,7 @@ if (!$enlace) {
 <html lang="es">
 <head>
     <title>Formulario de actualización de datos</title>
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/estils.css">
 </head>
 <body>
     <?php
@@ -46,7 +46,7 @@ if (!$enlace) {
         <?php
     } else {
         ?>
-        Actualización realizada correctamente!!! <a href="../index.php">Volver a la página principal</a>
+        Actualización realizada correctamente!!! <a href="../plantilla.php">Volver a la página principal</a>
         <?php
     }
     ?>

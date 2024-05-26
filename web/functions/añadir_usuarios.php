@@ -21,14 +21,12 @@ if (!$enlace) {
  * Obté les dades del nou jugador des del formulari d'inscripció
  */
 $nom = $_POST['nom'];
-$apellido1 = $_POST['apellido1'];
-$apellido2 = $_POST['apellido2'];
-$telefono = $_POST['telefono'];
-$pais = $_POST['pais'];
-$equipo = $_POST['equipo'];
+$email = $_POST['email'];
+$contraseña = $_POST['contraseña'];
 
-$inscripcióSQLDades = "INSERT INTO dades_jugadors 
-                        VALUES (NULL, '$nom', '$apellido1', '$apellido2', '$telefono', '$equipo' ,$pais)";
+
+$inscripcióSQLDades = "INSERT INTO usuaris 
+                        VALUES (NULL, '$nom', '$email', '$contraseña')";
 
 
 ?>
@@ -36,11 +34,11 @@ $inscripcióSQLDades = "INSERT INTO dades_jugadors
 <html lang="es">
 <head>
     <title>Resultat Inscripció</title>
-    <link rel="stylesheet" type="text/css" href="./css/estils.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
 <body>
     <nav>
-        <a href="../index.php">Tornar a la pàgina principal</a>
+        <a href="../plantilla.php">Anar a la plantilla del club</a>
     </nav>
     <?php
     $resultado = mysqli_query($enlace, $inscripcióSQLDades);

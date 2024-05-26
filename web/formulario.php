@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <title>Formulari d'inscripció</title>
-    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/estils.css">
 </head>
 <body>
     <nav>

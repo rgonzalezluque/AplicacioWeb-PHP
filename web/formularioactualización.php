@@ -23,7 +23,7 @@ if (!$enlace) {
 <html lang="es">
 <head>
     <title>Formulario d'actualización</title>
-    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="./css/estils.css">
 </head>
 <body>
     <?php
